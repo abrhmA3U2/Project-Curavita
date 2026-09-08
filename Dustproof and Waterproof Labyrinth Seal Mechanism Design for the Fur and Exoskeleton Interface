@@ -1,0 +1,38 @@
+This machine features a structural configuration where the flexible artificial fur (microfiber layer) covering the entire chassis directly interfaces with the metallic maintenance hatch (heat dissipation and power reception unit) on the underbelly. This section defines a hybrid non-contact/contact sealing mechanism designed to physically block household dust, pet hair, and accidental liquid splashes from penetrating the hatch gaps and reaching the internal main MCU (Cortex-M7).
+## 1. Physical Structure & Ingress Protection (IP) Mechanisms
+To achieve compliance with the International Protection rating IP54 (Dust-protected, Splash-proof) while preventing fur fibers from jamming the sliding track during maintenance routines, a triple-layered defense barrier is implemented along the interface boundary:
+
+[Internal Main MCU & Skeleton Compartment]
+                 │
+ ┌───────────────┴───────────────┐
+ │ [Layer 3: EPDM Hollow Rubber] (Hermetic Sealing / Ultimate Barrier)
+ └───────────────┬───────────────┘
+                 │
+ ┌───────────────┴───────────────┐
+ │ [Layer 2: Resin Labyrinth]     (Fluid Kinetic Energy Dissipation Trap)
+ └───────────────┬───────────────┘
+                 │
+ ┌───────────────┴───────────────┐
+ │ [Layer 1: FKM Scraper Blade]  (Fur Jamming Prevention & Primary Dust Block)
+ └───────────────┬───────────────┘
+                 │
+[External: Artificial Fur Layer] ──> [Sliding Aluminum Underbelly Hatch]
+
+
+* Layer 1: Fur Jamming Prevention via Fluororubber (FKM) Scraper Blade
+* Structure: The edge of the artificial fur is firmly crimped and secured to the internal skeletal frame via specialized exterior fixation rivets. Directly beneath this fur termination line, a flexible fluororubber (FKM) scraper blade with a thickness of 0.5 mm is positioned to trace the entire outer perimeter of the sliding hatch.
+   * Performance: When the underbelly hatch slides open or closed during the 3-month certified salon maintenance cycle, this blade acts as a wiper, deflecting long fur fibers outward. It physically intercepts microfibers before they jam the metallic hatch rails and blocks bulk household dust.
+* Layer 2: Dual Labyrinth Drain Channels Utilizing Capillary Action Suppression
+* Structure: A dual, molded resin labyrinth (maze-like) interlocking track with a sharp Z-shaped profile is engraved along the mating interface between the internal skeleton and the sliding aluminum hatch.
+   * Performance: If trace fluid splashes bypass Layer 1, they collide with this maze-like wall array, completely dampening the kinetic energy of the liquid. Captured fluid is passively redirected down the drainage incline and expelled outward, counteracting ingress driven by capillary action.
+* Layer 3: Compressible EPDM Hollow Sponge Rubber O-Ring Seal
+* Structure: An EPDM (Ethylene Propylene Diene Monomer) hollow sponge O-ring seal featuring exceptional durability and weather resistance is embedded at the deepest point of the labyrinth channel, directly preceding the internal electronics compartment.
+   * Performance: Throughout the 3-month operational cycle, while the underbelly hatch remains locked by its latches, this hollow profile is compressed to a factory-calibrated compression ratio of 30% to 40%. This contact seal completely locks out microscopic airborne dust particles and ambient humidity that bypass Layers 1 and 2.
+
+## 2. Serviceability During 3-Month Salon Maintenance Windows
+
+* To facilitate rapid turnaround times for component replacement (hot-swappable battery and joint gear buffers) by certified salon technicians, this waterproof and dustproof sealing assembly is directly tied to a tool-less, one-touch latching mechanism.
+* Releasing the underbelly latches instantly unloads the compression on Layer 3, allowing the aluminum hatch to slide backward smoothly while riding the low-friction FKM scraper blades of Layer 1 without any structural stress.
+* Re-engaging the hatch requires only a forward push; the labyrinth tracks auto-align via a self-mating profile, culminating in an audible click that locks the latch and compresses the EPDM seal uniformly. This design ensures that factory-grade IP54 protection is restored regardless of technician skill level.
+
+------------------------------
