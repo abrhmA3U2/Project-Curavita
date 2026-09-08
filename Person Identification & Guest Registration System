@@ -1,0 +1,36 @@
+Defines a standalone identification infrastructure that executes zero image recognition via optical cameras, relying strictly on the mutual cross-checking of voiceprints (acoustic waveforms) and VOCs (Volatile Organic Compounds) within a local edge computing environment to distinguish up to approximately five family members without misidentification, while simultaneously safeguarding the privacy of visiting guests.
+## 1. Biological Characterization Groups (Tiered Templates) for Family Identification
+By exploiting the distinct scientific variations in voiceprints and body odors (frequency bands and metabolic compounds) dictated by age and biological sex, the main MCU (ARM Cortex-M7) implements four predefined biological templates within its local memory to optimize classification fidelity:
+
+* Group A: Children (High-Pitch / Developmental VOC Profiles)
+* Characteristics: Characterized by an exceptionally high voiceprint fundamental frequency (F0: pitch) exceeding 250 Hz, combined with relatively low ambient concentrations of metabolic VOCs.
+   * Error Prevention Vector: Applies high-pass acoustic filtering with top priority during voice processing, completely isolating the tracking data from adult voiceprint templates within the software pipeline.
+* Group B: Grandparents (Mellow-Pitch / Saturated Fatty Acid VOC Profiles)
+* Characteristics: Features lower, stabilized acoustic tonality paired with a highly reproducible volatile fatty acid compound signature (e.g., nonenal).
+* Group C: Mothers (Mid-High Pitch / Female-Specific VOC Profiles)
+* Characteristics: Operates within the mid-high acoustic register (approximately 180 Hz to 240 Hz) mapped alongside female-specific metabolic compound waveforms.
+* Group D: Fathers (Low-Pitch / Male-Specific VOC Profiles)
+* Characteristics: Defined by a deep, low-frequency acoustic register (approximately 85 Hz to 150 Hz) mapped alongside male-specific metabolic compound waveforms (e.g., androstenone).
+* Flat Behavioral Control via "Zero-Priority" Logic (Deadlock Avoidance):
+The identification algorithm enforces no preferential priority among registered individuals. The robot responds autonomously to either the most recent valid voiceprint event identifying its name or the closest registered VOC payload currently detected in short-range proximity. This flat design prevents software resource contention (deadlocks), maintaining a natural, organic, and equitable behavioral distance with all family members, mimicking a real biological companion.
+
+## 2. Behavioral Delayed Evaluation (Animal-like Cross-Checking) Under Ambiguity
+
+* Acoustic Pitch Overlap Logic:
+When acoustic pitches temporarily overlap among family members due to vocal fatigue, illness, or variable intonation—creating a classification gray zone (undetermined classification status)—the system immediately triggers a mandatory chemical VOC cross-check.
+* Transformation into Biological Motion:
+To prevent the system from executing a false classification due to rushed parsing, the MCU cues an autonomous motion sequence during the computational processing lag: "Section 3-2: Animal-like Behavioral Buffering (the physical act of stepping closer and sniffing the subject)." During this deliberate behavioral loop, the system completes the pattern-matching routine between the subject’s metabolic VOC emissions and the local memory templates, securing final individual identification with high tracking fidelity.
+
+## 3. Guest (Visitor) Temporary Registration & Volatile Flash Elimination System
+A temporary specification designed to prevent the robot from treating unregistered third parties (guests) as hostile threats—which would trigger excessive avoidance routines like lowering the tail or folding back the ears—enabling safe and friendly social interaction.
+
+* One-time Pairing (Welcome-Home Master) Mode:
+Upon a guest’s arrival, a registered owner enters a specific hardware command via the robot's cranial tactile sensors (e.g., executing three consecutive gentle taps on the head). The machine shifts into "Guest Welcome Mode," capturing the visitor's vocal greetings and near-field palm VOC emissions, caching this data temporarily into volatile system memory.
+* Volatile Secure RAM Buffer Deployment:
+Guest biological profiles are strictly isolated from the non-volatile flash storage layer. The data is deployed exclusively within a fully volatile secure RAM buffer that loses all electrical charge—and thus all contents—the instant power is disconnected or a specific hardware flag is raised.
+* Automated Data Flash (Purge Execution):
+When the guest departs and the robot returns to its nest (wireless charging dock), the docking interface initiates a hardware reset signal via the physical charging interface. This hardware trigger executes an absolute and irreversible physical flash (purge) of the guest data within the secure RAM buffer.
+This architecture guarantees that zero third-party privacy data remains stored inside the hardware chassis after the interaction concludes, while allowing the robot to act companionable and request treats from "the recent visitor" during their stay, fulfilling strict privacy legislation standards (e.g., GDPR).
+
+------------------------------
+
