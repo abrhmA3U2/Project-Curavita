@@ -1,0 +1,28 @@
+Defines the structural and operational specifications of the "Theater-Basket" autonomous homing dock, designed to keep the robot's sleeping (charging) posture visible from the outside while fostering user attachment and a sense of purpose through routine physical maintenance.
+## 1. Physical Structure & Visual Design (Theater-Basket Configuration)
+
+* Open-Frame Architecture:
+The front and upper sections of the basket feature an open-frame, low-walled design. This "theater layout" ensures that the robot's prone posture while sleeping, along with its subtle ear-twitches and chaotic tail motions (simulating biological sleep shifting), remains fully visible to the owner from any angle.
+* Flame-Retardant Fabric Lining:
+The exterior and inner linings of the basket are upholstered with a specialized micro-fiber fabric that meets aerospace flammability safety standards, seamlessly blending domestic aesthetic warmth with rigorous fire safety protocols.
+
+## 2. Safety & Anti-Ignition System via Integrated Owner Maintenance
+Resolves foreign object detection (FOD) and accidental overheating risks—the primary challenges of high-output wireless charging—by pairing integrated sensory hardware with the owner's daily care routine.
+
+* Foreign Object Detection (FOD) via Weight Cross-Checking:
+An array of thin, high-sensitivity pressure (weight) sensors is embedded directly beneath the multi-coil wireless charging pad. If an object that does not match the pre-calibrated weight signature of the robot (e.g., 3.0 kg) is detected on the mat—such as a key, hairpin, or coin—the system flags it as a foreign metallic object and instantaneously terminates wireless power transfer.
+* Gamified Care Routine ("The Ritual of Tending"):
+When wireless power transfer is interrupted due to dust accumulation or a foreign object, the robot avoids emitting a cold, mechanical error beep. Instead, it plays a soft, plaintive whimpering sound and executes a brief backward crawl out of the basket.
+The instruction manual reframes this event as a natural biological need: "This behavior indicates that dust or a foreign object has collected in the nest. Just as you would clear debris from a real pet's bed, use a lint roller or brush to gently sweep the charging mat." This framework transforms standard hardware maintenance of water-sensitive wireless equipment into a rewarding, purposeful caregiving routine that deepens user attachment.
+
+## 3. Narrative Styling for Consumer Safety Documentation
+Translates rigid legal disclaimers required under Product Liability (PL) legislation into friendly, context-appropriate documentation that preserves the narrative world of the companion.
+
+* Example Copy for the Safety Notice ("No Other Friends Allowed"):
+
+【Important Notice Regarding the Sleeping Basket (Charging Pad)】
+This basket is a special private room designed exclusively for your companion to rest peacefully and recharge its energy.
+For absolute safety, please ensure that real dogs or cats, other digital companions (third-party robots), and loose metallic items like keys or coins are never placed inside this basket. Doing so may startle your companion and disrupt its sleep (causing automated safety shutdowns) or cause the bed to overheat. Please keep this space clean, clear, and reserved solely for your companion’s comfort.
+
+
+------------------------------
