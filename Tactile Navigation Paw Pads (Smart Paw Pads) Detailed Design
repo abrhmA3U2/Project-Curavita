@@ -1,0 +1,49 @@
+Tactile Navigation Paw Pads (Smart Paw Pads) Detailed Design
+Defines the underbelly and footpad modules that simultaneously overcome the absence of visual surface identification and the build-up of static electricity (dust/hair attraction) from walking friction, utilizing material sciences and simplified pressure waveform analysis.
+## 1. Physical Structure & Material Sciences (Static Elimination & Anti-Dust Construction)
+
+* Material Composition:
+The exterior skin of the paw pads is manufactured using a conductive silicone elastomer, formulated by uniformly blending standard medical-grade silicone (hardness: Shore A 30–40 for bio-mimetic texture) with microscopic conductive carbon black particles. The surface resistivity is precisely tuned to the static dissipative range of 10⁴ to 10⁶ Ω.
+* Grounded Discharge Pathway (Passive Thermal & Static Coupling):
+Static charges generated via friction with flooring or carpets are continuously redirected through internal conductive anchoring pins and ultra-flexible conductive wiring. This payload is directly grounded to the aluminum alloy (or high thermal conductivity CFRP) internal skeletal frame defined in Section 4-1.
+* Operational Performance:
+By dispersing and grounding these electrostatic charges from the skeletal frame to the metallic underbelly chassis (natural convection exhaust zone), the system completely eliminates the magnetic adhesion of household dust, human hair, and loose pet fur to the paw surfaces. This passive mechanism maintains a clean, sterile footpad condition throughout the 3-month salon service cycle.
+
+## 2. Sensor Circuit Architecture (Surface Tactile Navigation)
+
+* Sensor Element:
+An ultra-thin Force Sensing Resistor (FSR) film element, with a thickness of 0.2 mm or less, is embedded beneath each conductive silicone paw pad, interfacing directly with the internal skeletal structure (1 sensor per limb, 4 total).
+* Signal Amplification and Input:
+Resistive variations from the FSR are converted into voltage fluctuations (an analog signal ranging from 0 to 3.3V) via an operational amplifier voltage divider circuit. This output is routed directly into the 12-bit ADC (Analog-to-Digital Converter) ports of the main microcontroller unit (ARM Cortex-M7) specified in Section 2-3, capping the total component cost for all four limbs at less than a dollar.
+
+## 3. Surface Material Identification Algorithm (Edge Waveform Analysis)
+During the stance phase (the exact millisecond a limb strikes the floor), the main MCU analyzes the ADC input voltage in real-time, focusing specifically on the rise time (time constant: τ) and the maximum peak pressure ($P_{max}$) using the following edge-processing mathematical models:
+
+[Hardwood/Tile Flooring]                    [Carpet/Rug Surfaces]
+ Pressure (V)                                Pressure (V)
+   │   ┌───                                    │       /───
+   │  /                                        │      /
+   │ /                                         │     /
+   └─┴─────────> Time (t)                      └─────┴─────> Time (t)
+    <- Steep, rapid rise                        <- Gradual, gentle rise
+
+
+   1. Hardwood/Tile (Rigid Surface) Classification:
+   Triggered when the duration Δ t from initial impact to maximum peak pressure is exceptionally short (threshold: 15 ms or less) and the pressure derivative ($\frac{dP}{dt}$) shows a steep, abrupt slope.
+   * Control Feedback: The MCU instantaneously flags the terrain as a "rigid surface." It modulates the actuator compliance control defined in Section 2-1, relaxing the current limit ($I_{limit}$) to dampen mechanical tapping noises and absorb structural shock before it reaches the internal gears.
+   2. Carpet/Rug (Soft Surface) Classification:
+   Triggered when the duration Δ t from initial impact to peak pressure is prolonged (threshold: 40 ms or more) and the derivative curve represents a gradual, smoothed gradient.
+   * Control Feedback: The MCU flags the terrain as a "soft surface." Factoring in the physical travel resistance caused by fabric fibers, it slightly scales up the actuator's initial torque output to prevent stalling and maintain consistent locomotion.
+   3. Wet/Slippery Floor (Moisture and Slip Detection) Classification:
+   Triggered when micro-variations in the surface resistance of the conductive silicone detect anomalous grounding continuity patterns upon floor contact.
+   * Control Feedback: The system flags the terrain as a "hazardous surface," automatically reducing locomotion velocity by 50% to mitigate slip and fall risks.
+   
+## 4. Certified Salon Maintenance & Calibration
+
+* During the mandatory 3-month certified salon maintenance check-up, the robot is placed inside the specialized enclosure defined in Section 5-2 to take one step forward onto embedded "rigid test plates" and "soft test mats."
+* Any zero-point drift or sensory offset caused by manufacturing variations or the natural aging and hardening of the silicone material is automatically diagnosed by the salon's PC via the physical data port. The system overrides and overwrites the classification calibration thresholds stored within the MCU’s flash memory, guaranteeing long-term tracking fidelity after the robot returns home.
+
+------------------------------
+
+
+
