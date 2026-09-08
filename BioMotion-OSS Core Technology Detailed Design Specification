@@ -1,0 +1,84 @@
+## BioMotion-OSS Core Technology Detailed Design Specification [Official Final Edition]## Chapter 1: Video Analysis Pipeline (AI & Data Extraction Layer)
+Defines the algorithm to extract 2D pixel data from general media footage and translate it into 3D joint angle data for robotics applications.
+## 1-1. Two-Stage Time-Series Hybrid Learning Mathematical Model
+
+* Macro-Learning (Self-Supervised Learning):
+Extracts frame-to-frame differences (optical flow) from vast amounts of raw, unlabelled animal video footage (SNS, web videos, etc.). Utilizing a Video-Transformer architecture, the system pre-trains the network to recognize dynamic contours and bulk locomotion vectors of the animal's entire body. This embeds the macroscopic mass-transfer tendencies into the network before handling individual joint blurs.
+* Micro-Learning (Annotation & Fine-Tuning):
+Applies human-annotated ground-truth coordinates of specific micro-structures (e.g., 5 reference points along whiskers, 6 joints along the tail) via supervised fine-tuning to the output layer of the pre-trained macro model. Since the macro-learning phase has already established the boundaries of the physical object, the system minimizes edge misidentification even with sparse training data.
+
+## 1-2. Trajectory Prediction & Error Detection Filter Algorithms
+To determine whether an AI-predicted coordinate point is an anomaly or tracking error, the system continuously runs a two-stage mathematical filter pipeline:
+
+   1. Stochastic Filtering (Kalman Filter & Likelihood Evaluation):
+   Monitors the tracking confidence score ($C_t$) provided by the AI for each joint coordinate output $(X_t, Y_t)$. If $C_t < 0.60$ persists for 3 consecutive frames or more, the system flags the drop as tracking loss (an anomaly). During this range, the coordinates are automatically interpolated using predicted values ($\hat{X}_t$) derived from the immediately preceding velocity vector $\vec{v}_{t-1}$ and acceleration vector $\vec{a}_{t-1}$.
+   2. Kinematic Constraint Check:
+   Enforces fixed kinematic boundaries hardcoded from animal anatomy (skeletal structure), specifically focusing on maximum allowable inter-joint distances ($L_{max}$) and maximum angular boundaries ($\theta_{max}$).
+   $$\sqrt{(X_{parent} - X_{child})^2 + (Y_{parent} - Y_{child})^2} > L_{max}$$ 
+   If an output coordinate violates the equation above (implying an impossible bone elongation) or shows unnatural joint hyperextension, the system immediately rejects the frame as a bug, plots it in red on the timeline, and notifies the human operator.
+
+------------------------------
+## Chapter 2: Embedded Control & Hardware Architecture (Chassis Layer)## 2-1. Compliance Control (Actuator Buffer) Implementation Specifications
+Real-time stiffness and elasticity configuration across 16 servo actuators (3 axes per limb × 4 limbs, 2 axes for the tail, 2 axes for the ears).
+
+* Torque-Limiting Control:
+Synchronizes and transmits a maximum allowable torque parameter (current limit value: $I_{limit}$) alongside target angle positions from the central processing unit to each actuator.
+* Standard Locomotion: Sets $I_{limit}$ to a median value, allowing ankle joints to passively deflect (buffer) against surface irregularities.
+   * Landing and Leaping: Synchronizes with the exact moment of landing impact (the peak G-force extracted from animal motion data) to instantaneously drop $I_{limit}$. Mechanical shock is absorbed through deliberate joint "relaxation" rather than stressing internal actuator gears.
+
+## 2-2. High-Speed Signal & Communication Protocols
+
+* CAN (Controller Area Network) Bus Integration:
+To transmit target angles and torque limits bi-directionally to 16 actuators at ultra-high cycles ranging from 500 Hz to 1 kHz, standard I2C buses are discarded. The architecture mandates a CAN bus (or RS-485 multi-drop configuration). This prevents bandwidth throttling, eliminating tracking delays and limb jitter.
+
+## 2-3. Microcontroller Interrupt Priorities (Control Stabilization)
+
+* RTOS (Real-Time Operating System) Task Prioritization:
+Defines strict priority levels within the main microcontroller unit (ARM Cortex-M7 class) for task scheduling and interrupt handling:
+* Priority [High]: 16-axis actuator compliance control for fall prevention, along with emergency fire/anomaly sensor detection and immediate interrupt processing.
+   * Priority [Low]: Chemical/odor sensor data analysis, chaotic mathematical tracking for ear gestures, and speaker audio output routines.
+
+------------------------------
+## Chapter 3: Safety, Privacy, and Sensory Edge Processing## 3-1. Zero-Camera Framework for absolute Privacy Protection
+
+* Eliminates all optical camera arrays from the hardware architecture. Spatial awareness and obstacle avoidance are executed solely by decentralized non-visual sensors (thermal sensors, infrared, millimeter-wave radar, and LiDAR) that are incapable of identifying individual privacy assets.
+
+## 3-2. Personal Identification & Substance Detection Systems (Sensory Edge Processing)
+
+* Voice (Acoustic Identification): Audio wave inputs captured by left and right microphones undergo local, lightweight Fast Fourier Transform (FFT) analysis inside the MCU to authenticate the registered owner based on frequency characteristics (voiceprints).
+* Chemical/Odor Pattern Matching:
+Reads chemical sensor surface resistance variations as analog voltage values. Volatile Organic Compounds (VOCs) originating from the registered owner's unique body odor, silver vine extract (nepetalactone), or dog treat amino acids are matched locally against pre-registered gas concentration waveform templates.
+* Sensor Latency Compensation via Behavioral Buffering:
+To mask the multi-second time delay required for chemical sensors to analyze odors, the system avoids mechanical lock-ups. Instead, it automatically cues realistic animal animations—such as "sniffing around" or "twitching ears to listen"—transforming technical processing latency into biological realism.
+
+## 3-3. Thermal Sensor-Cleaning (Odor Refresh) Mechanism
+
+* Upon concluding a detection routine or returning to the charging dock, the system activates miniature internal heating elements within the chemical sensor housing for a few seconds. This thermal burst rapidly evaporates bound odor molecules, resetting the sensor surface and eliminating residual scent contamination.
+
+------------------------------
+## Chapter 4: Thermal, Acoustic, and Physical Infrastructure Specifications## 4-1. Fanless Passive Thermal Dissipation Design
+Prevents internal heat accumulation caused by the insulating properties of the plush faux-fur exterior layer, while maintaining a silent operational envelope required for clear acoustic microphone tracking.
+
+   1. Structural Chassis Heatsink Integration:
+   The internal skeletal frame is manufactured using high thermal conductivity materials, such as die-cast aluminum alloys or high-conductivity CFRP (Carbon Fiber Reinforced Polymer). This converts the entire skeleton into a distributed heatsink, channeling Joule heat away from the 16 high-frequency actuators.
+   2. Underbelly Metallic Chassis (Natural Convection Exhaust):
+   Channels heat stored within the skeleton toward the lower abdomen, which interfaces directly with the ground when the robot adopts a prone posture on its wireless charging nest. Making the underbelly hatch double as an aluminum cooling plate provides completely silent heat dissipation without employing audible cooling fans that degrade microphone Signal-to-Noise (S/N) ratios.
+
+## 4-2. Waterproof and Dustproof Physical Data Port
+
+* The diagnostic data port (USB-C or proprietary pinning) housed inside the underbelly maintenance hatch features a magnetic waterproof/dustproof pogo-pin terminal configuration or a rubber-gasket sealed cover lock. This insulates data lines from floor dust, pet hair, and condensation, ensuring reliable connection during scheduled salon check-ups.
+
+------------------------------
+## 第5章：運用サービスおよびビジネスモデルの整合性 (Operations & Circular Business Model Alignment)## 5-1. Mandatory In-Person Salon Maintenance Across All Tiers
+
+* To enforce structural safety and manage enterprise liability under Product Liability (PL) legislation, all internal mechanism and battery cartridge swaps must be executed directly at certified physical salons by accredited technicians.
+* For the Entry Plan (Annual Maintenance), the enterprise legally discloses at the time of contract that depending on daily usage, wear on sensors or motors may lead to malfunctions before the next scheduled annual check-up, securing written informed consent.
+
+## 5-2. Retention Incentives Linked with Sensory Calibration
+
+* Enrolling in the Premium Subscription (Quarterly Maintenance) grants milestone benefits after one year of consecutive compliance, including a fee waiver for the next basic service window and a local soft-ware flashing session to upload advanced behavioral motions (e.g., complex ear expressions, rare vocalizations, extended chaotic affection routines).
+* Simultaneously, during quarterly visits, technicians isolate the chemical sensor inside a controlled, constant temperature and humidity testing enclosure. This executes a periodic calibration routine to negate household environmental drift, ensuring perfect sensory reliability.
+
+------------------------------
+
+
