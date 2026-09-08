@@ -1,0 +1,16 @@
+## 1. Possibilities of Passive Intrusion & Anomaly Detection Utilizing Micro-Vibrations (Structure-Borne Noise)
+A theoretical framework to utilize structure-borne noise (floor vibrations) captured during the robot's sleep cycles (while docked in a prone posture) to passively detect midnight intrusions (security) and critical occupant falls (elderly care) under a zero-camera architecture.
+
+* Conceptual Logic Framework:
+During the first two weeks of deployment, the device establishes a baseline profile of the household’s unique environmental noises and the owner's standard gait impacts ("Daily Vibration Baseline"). In a armed night-time mode, if the system captures anomalous, consecutive walking impulses that drastically exceed this baseline—and do not match any registered family profiles—it flags a potential intrusion, exits docking mode, and emits distinct predatory vocalizations toward the source to alert occupants and deter the intruder.
+Furthermore, the catastrophic kinetic energy of a human body impacting the floor (a low-frequency shockwave) propagates through the structural slab regardless of carpet insulation. If this distinct physical impact envelope is detected, followed by a total cessation of family acoustic and kinetic telemetry for several minutes, the system infers a critical collapse event and forces immediate emergency escape alert routines.
+
+## 2. Strategic Technical Bottlenecks for Global Community Resolution (Proposals)
+To evolve this concept from an experimental fallback tool into a highly reliable diagnostic and security system, the following unmapped challenges are presented to developers for collaborative repository development:
+
+* Challenge A: Standardization of an Ambient Attenuation Function Database for Variable Floor Textures
+Human locomotion profiles attenuate and distort aggressively depending on sub-floor dynamics (e.g., hardwood, tatami mats, cork tiles, high-pile carpets). To achieve accurate edge-parsing without cloud infrastructure, the community must crowd-source and standardize a global lookup table mapping the transfer functions of specific domestic flooring composites.
+* Challenge B: Environmental Noise Isolation and False-Positive Mitigation
+To systematically distinguish near-field occupant falls from heavy transit infrastructure noise (e.g., commercial trucks, passing trains, seismic rumbles), developers must architect hyper-lightweight time-series models—such as a 1D-CNN (One-Dimensional Convolutional Neural Network)—optimized for low-power edge deployment on the main MCU.
+
+------------------------------
